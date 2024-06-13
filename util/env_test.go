@@ -5,9 +5,8 @@ import (
 	"testing"
 )
 
-var tz = os.Getenv("TTY")
-
 func TestGetEnv(t *testing.T) {
+	os.Setenv("FOO", "1")
 	type args struct {
 		key      string
 		fallback string
@@ -20,10 +19,10 @@ func TestGetEnv(t *testing.T) {
 		{
 			name: "read env",
 			args: args{
-				key:      "TTY",
+				key:      "FOO",
 				fallback: "null",
 			},
-			want: tz,
+			want: "1",
 		},
 		{
 			name: "fallback",
