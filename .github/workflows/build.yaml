@@ -2,8 +2,8 @@ name: Build and Push Docker Image when main branch updated
 
 on:
   push:
-    branches-ignore:
-      - "**"
+    branches:
+     - "main"
     
 jobs:
   build-and-push:
