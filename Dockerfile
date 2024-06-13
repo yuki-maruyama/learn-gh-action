@@ -7,11 +7,12 @@ COPY . .
 
 RUN go mod download
 
-RUN CGO_ENABLED=0 go build -o /go/bin/app ./cmd/api-server
+RUN CGO_ENABLED=0 go build -o /go/bin/app ./cmd/server
 
 FROM gcr.io/distroless/static-debian12
 
 COPY --from=build /go/bin/app /
+COPY --from=build /go/src/app/blob /blob
 
 EXPOSE 8888
 
