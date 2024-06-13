@@ -26,7 +26,7 @@ func TestStrToIntPtr(t *testing.T) {
 		{
 			name: "failed",
 			args: args{
-				s: fmt.Sprint("qwerty"),
+				s: "qwerty",
 			},
 			want: nil,
 		},

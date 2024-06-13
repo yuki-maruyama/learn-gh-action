@@ -2,6 +2,7 @@ package controller
 
 import (
 	"image/jpeg"
+	"log"
 	"net/http"
 
 	"github.com/yuki-maruyama/learn-gh-action/model"
@@ -24,7 +25,10 @@ func (c *imageController) GetImageHandler(w http.ResponseWriter, r *http.Request
 	res, err := c.service.GetResizedImageService(r.Context(), req)
 	if err != nil {
 		w.WriteHeader(500)
-		w.Write([]byte(err.Error()))
+		_, err := w.Write([]byte(err.Error()))
+		if err != nil {
+			log.Println(err.Error())
+		}
 	}
 
 	w.Header().Set("Content-Type", "image/jpeg")
@@ -32,6 +36,9 @@ func (c *imageController) GetImageHandler(w http.ResponseWriter, r *http.Request
 	err = jpeg.Encode(w, res.Image, &jpeg.Options{})
 	if err != nil {
 		w.WriteHeader(500)
-		w.Write([]byte(err.Error()))
+		_, err := w.Write([]byte(err.Error()))
+		if err != nil {
+			log.Println(err.Error())
+		}
 	}
 }
