@@ -30,10 +30,7 @@ func main() {
 		<-ctx.Done()
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
-		err := server.Shutdown(ctx)
-		if err != nil {
-			log.Fatal(err.Error())
-		}
+		server.Shutdown(ctx)
 	}()
 	log.Println("server start running at :8888")
 	log.Fatal(server.ListenAndServe())
